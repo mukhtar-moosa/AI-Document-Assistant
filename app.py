@@ -31,8 +31,9 @@ load_dotenv()
 MISTRAL_API_KEY = os.getenv("MISTRAL_API_KEY")
 CHAT_MODEL_NAME = os.getenv("MISTRAL_CHAT_MODEL", "mistral-small-latest")
 EMBED_MODEL_NAME = os.getenv("MISTRAL_EMBED_MODEL", "mistral-embed")
-PERSIST_DIR = os.getenv("CHROMA_PERSIST_DIR", "./chroma_db")
-
+PERSIST_DIR = st.secrets.get("CHROMA_PERSIST_DIR") or os.getenv(
+    "CHROMA_PERSIST_DIR", "/tmp/chroma_db"
+)
 SUPPORTED_TYPES = ["pdf", "txt", "docx"]
 
 st.set_page_config(page_title="AI Document Assistant", page_icon="📚", layout="centered")
